@@ -4,7 +4,7 @@
 from bluetooth.ble import GATTRequester
 
 
-class Trolley(object):
+class Toio(object):
     HANDLER = {'motor': "TBU"}
     DIRECTION = {'fwd': 1, 'bck': 2}
     MOTOR = {'1st': 1, '2nd': 2}

@@ -4,7 +4,7 @@ import sys
 import termios
 import tty
 
-from toio import Trolley
+from toio.toio import Toio
 
 UUID_NAME = "TBD"
 
@@ -28,56 +28,56 @@ def _get_ta_addr():
     ret_addr = ""
     for d in devices:
         if d['name'] and 'Trolley' in d['name']:
-            print("TA name: {}, address: {}".format(d['name'], d['address']))
+            print("Toio name: {}, address: {}".format(d['name'], d['address']))
             ret_addr = d['address']
     if not ret_addr:
-        print("TA not found")
+        print("Toio not found")
     return str(ret_addr)
 
 
 def main():
-    trolley = Trolley(_get_ta_addr())
-    if trolley.is_connected():
-        trolley.request_data(UUID_NAME)
-        trolley.straight()
-        trolley.disconnect()
+    toio = Toio(_get_ta_addr())
+    if toio.is_connected():
+        toio.request_data(UUID_NAME)
+        toio.straight()
+        toio.disconnect()
 
 
 def main_steps():
-    trolley = Trolley(_get_ta_addr())
-    if trolley.is_connected():
-        trolley.straight()
-        trolley.turn_right()
-        trolley.back()
-        trolley.spin_turn_180()
-        trolley.disconnect()
+    toio = Toio(_get_ta_addr())
+    if toio.is_connected():
+        toio.straight()
+        toio.turn_right()
+        toio.back()
+        toio.spin_turn_180()
+        toio.disconnect()
 
 
 def main_user_input():
-    trolley = Trolley(_get_ta_addr())
-    if trolley.is_connected():
+    toio = Toio(_get_ta_addr())
+    if toio.is_connected():
         print("w: UP, a: TURN LEFT, d: TURN RIGHT, x: BACK, SHIFT+C: exit")
         while True:
             with ReadChar() as rc:
                 char = rc
             if char == 'w':
-                trolley.straight()
+                toio.straight()
             elif char == 'a':
-                trolley.turn_left()
+                toio.turn_left()
             elif char == 'd':
-                trolley.turn_right()
+                toio.turn_right()
             elif char == 'x':
-                trolley.back()
+                toio.back()
             if char in "^C":
                 break
-        trolley.disconnect()
+        toio.disconnect()
 
 
 def main_test():
-    trolley = Trolley(_get_ta_addr())
-    if trolley.is_connected():
-        trolley.back()
-        trolley.disconnect()
+    toio = Toio(_get_ta_addr())
+    if toio.is_connected():
+        toio.back()
+        toio.disconnect()
 
 
 if __name__ == '__main__':
