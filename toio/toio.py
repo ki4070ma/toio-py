@@ -16,7 +16,7 @@ class Toio(object):
             return
         self.req = GATTRequester(addr, False)
         print("Connecting...: {}".format(addr))
-        self.req.connect(True, 'random')
+        self.req.connect(wait=True, channel_type="random")
         print("Connected: {}".format(addr))
 
     def request_data(self, uuid):

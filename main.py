@@ -6,7 +6,7 @@ import tty
 
 from toio.toio import Toio
 
-UUID_NAME = "TBD"
+UUID_NAME = "10B20100-5B3B-4571-9508-CF3EFCD7BBAE"
 
 
 class ReadChar():
@@ -24,10 +24,11 @@ class ReadChar():
 def _get_ta_addr():
     from pygatt.backends.gatttool.gatttool import GATTToolBackend
     gatttool = GATTToolBackend()
-    devices = gatttool.scan(timeout=2)
+    devices = gatttool.scan(timeout=5)
     ret_addr = ""
+
     for d in devices:
-        if d['name'] and 'Trolley' in d['name']:
+        if d['name'] and 'toio Core Cube' in d['name']:
             print("Toio name: {}, address: {}".format(d['name'], d['address']))
             ret_addr = d['address']
     if not ret_addr:
